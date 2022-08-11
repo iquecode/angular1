@@ -16,7 +16,6 @@ export class BooksComponent implements OnInit {
 
   books: Book[] = [];
 
-  card: Book[] = [];
 
   isShowing: boolean = true;
 
@@ -26,8 +25,5 @@ export class BooksComponent implements OnInit {
     this.books = this.booksService.getBooks();
   }
 
-  addToCard(book : Book){
-    
-  }
 
 }
