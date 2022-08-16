@@ -14,6 +14,7 @@ export class AuthService {
 
   login(form: LoginForm) {
     if (this.isLoading) return;
+    
     this.isLoading = true;
     const auth = getAuth();
     signInWithEmailAndPassword(auth, form.email, form.password)
