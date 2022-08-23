@@ -38,10 +38,10 @@
             <button type="submit" [disabled]="myForm.form.invalid"
                 class="p-2 w-full bg-purple-700 text-white hover:bg-purple-900"
             >
-                <ng-container *ngIf="this.isLoading">
+                <ng-container *ngIf="this.isLoading()">
                     Loading...
                 </ng-container>
-                <ng-container *ngIf="!isLoading">
+                <ng-container *ngIf="!this.isLoading()">
                     Login
                 </ng-container>
                
