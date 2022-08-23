@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Router } from '@angular/router';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { LoginForm } from '../types/LoginForm';
 import { RegisterForm } from '../types/RegisterForm';
 
@@ -8,7 +9,7 @@ import { RegisterForm } from '../types/RegisterForm';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   isAuthenticated: boolean = false;
   isLoading: boolean = false;
@@ -21,6 +22,7 @@ export class AuthService {
     signInWithEmailAndPassword(auth, form.email, form.password)
       .then((userCredential) => {
         this.isAuthenticated = true;
+        this.router.navigate(['']);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -53,6 +55,20 @@ export class AuthService {
         this.isAuthenticated = false;
       })
       .finally(() => this.isLoading = false);
+  }
+
+
+  logout() {
+
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      this.router.navigate(['login']);
+      this.isAuthenticated = false;
+    }).catch((error) => {
+
+    });
+
+
   }
 
   
